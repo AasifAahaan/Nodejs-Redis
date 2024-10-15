@@ -6,6 +6,7 @@ import logger from "./utils/logger";
 dotenv.config();
 import checkRoutes from "../src/routes"
 import { limiter } from "./utils/rateLimit";
+import { connectRedis } from "./config/redis.config";
 
 const app: Application = express();
 
@@ -22,6 +23,9 @@ app.use(cors({
 }))
 
 app.use(limiter)
+
+// redis client... 
+connectRedis()
 
 //ROUTES...
 app.use("/api/auth", checkRoutes)
